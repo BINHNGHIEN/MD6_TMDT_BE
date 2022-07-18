@@ -1,5 +1,7 @@
 package com.example.md6_final_project_be.dto.request;
 
+
+import java.time.LocalDateTime;
 import java.util.Set;
 
 public class SignUpForm {
@@ -7,6 +9,7 @@ public class SignUpForm {
     private String username;
     private String email;
     private String avatar;
+    private LocalDateTime createDate;
     private String password;
     private Set<String> roles;
 
@@ -18,6 +21,7 @@ public class SignUpForm {
         this.username = username;
         this.email = email;
         this.avatar = avatar;
+        this.createDate= LocalDateTime.now();
         this.password = password;
         this.roles = roles;
     }
