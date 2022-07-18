@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,6 +21,10 @@ public class AppUser {
     @Size(max = 50)
     @Email
     private String email;
+    @Email
+    private String phoneNB;
+    @Email
+    private LocalDateTime createDate;
     @JsonIgnore
     @Size(min = 6, max = 100)
     private String password;
@@ -43,7 +48,35 @@ public class AppUser {
         this.roles = roles;
     }
 
-    public AppUser( String name, String username, String email, String avatar, String encode
+    public String getPhoneNB() {
+        return phoneNB;
+    }
+
+    public void setPhoneNB(String phoneNB) {
+        this.phoneNB = phoneNB;
+    }
+
+    public LocalDateTime getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(LocalDateTime createDate) {
+        this.createDate = createDate;
+    }
+
+    public AppUser(Long id, String name, String username, String email, String phoneNB, LocalDateTime createDate, String password, String avatar, Set<Role> roles) {
+        this.id = id;
+        this.name = name;
+        this.username = username;
+        this.email = email;
+        this.phoneNB = phoneNB;
+        this.createDate = createDate;
+        this.password = password;
+        this.avatar = avatar;
+        this.roles = roles;
+    }
+
+    public AppUser(String name, String username, String email, String avatar, String encode
     ) {
         this.name = name;
         this.username = username;
