@@ -25,4 +25,10 @@ public class ProductServiceIMPL implements IProductService{
     public void save(Product product) {
         productRepository.save(product);
     }
+
+    @Override
+    public Iterable<Product> findByCategory(String name) {
+
+        return productRepository.findByCategory();
+    }
 }

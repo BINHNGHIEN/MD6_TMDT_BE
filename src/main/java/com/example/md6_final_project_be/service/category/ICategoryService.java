@@ -10,6 +10,7 @@ import java.util.Optional;
 
 public interface ICategoryService {
     List<Category> findAll();
+
     Page<Category> findAll(Pageable pageable);
     Category save(Category category);
     Boolean existsByNameCategory(String nameCategory);

@@ -47,5 +47,11 @@ public class ProductController {
         productService.save(product);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    // tìm kiếm theo bộ lọc
+    @GetMapping("/{name}")
+    public ResponseEntity<?> searchByCategory(@PathVariable String name){
+
+    }
 }
 
