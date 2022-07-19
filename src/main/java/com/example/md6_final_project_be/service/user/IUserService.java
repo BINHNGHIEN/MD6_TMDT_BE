@@ -15,4 +15,5 @@ public interface IUserService {
     Page<AppUser> findAll(Pageable pageable); //Page User
     Iterable<AppUser> findAll();
     Iterable<AppUser> findAllCustomer();
+    Iterable<AppUser> findCustomerByPhoneNB(String phoneNB);
 }

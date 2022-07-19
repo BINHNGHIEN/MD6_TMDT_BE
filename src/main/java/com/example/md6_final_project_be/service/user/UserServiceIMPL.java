@@ -48,4 +48,9 @@ public class UserServiceIMPL implements IUserService{
     public Iterable<AppUser> findAllCustomer() {
         return userRepository.findAllCustomer();
     }
+
+    @Override
+    public Iterable<AppUser> findCustomerByPhoneNB(String phoneNB) {
+        return userRepository.findCustomerByPhoneNB(phoneNB);
+    }
 }

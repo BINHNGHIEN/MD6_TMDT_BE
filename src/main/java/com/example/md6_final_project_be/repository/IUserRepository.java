@@ -16,4 +16,8 @@ public interface IUserRepository extends JpaRepository<AppUser,Long> {
 
     @Query(value = "SELECT * FROM app_user a JOIN user_role u ON id = user_id WHERE role_id = 1", nativeQuery = true)
     Iterable<AppUser> findAllCustomer();
+
+    @Query(value = "SELECT * FROM app_user JOIN user_role ON id = user_id WHERE role_id = 1 AND phonenb LIKE ?1", nativeQuery = true)
+    Iterable<AppUser> findCustomerByPhoneNB(String phoneNB);
 }
+
