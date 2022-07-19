@@ -63,13 +63,13 @@ public class AppUser {
         this.createDate = createDate;
     }
 
-    public AppUser(Long id, String name, String username, String email, String phoneNB, LocalDateTime createDate, String password, String avatar, Set<Role> roles) {
+    public AppUser(Long id, String name, String username, String email, String phoneNB, String password, String avatar, Set<Role> roles) {
         this.id = id;
         this.name = name;
         this.username = username;
         this.email = email;
         this.phoneNB = phoneNB;
-        this.createDate = createDate;
+        this.createDate = LocalDateTime.now();
         this.password = password;
         this.avatar = avatar;
         this.roles = roles;
