@@ -94,12 +94,12 @@ public class CategoryController {
     categoryService.save(category1.get());
     return new ResponseEntity<>(new ResponseMessage("yes"), HttpStatus.OK);
 }
-    @GetMapping("/list")
-    public ResponseEntity<?> getListCategory(){
-        List<Category> categoryList = categoryService.findAll();
-        if(categoryList.isEmpty()){
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-        return new ResponseEntity<>(categoryList, HttpStatus.OK);
-    }
+//    @GetMapping("/list")
+//    public ResponseEntity<?> getListCategory(){
+//        List<Category> categoryList = categoryService.findAll();
+//        if(categoryList.isEmpty()){
+//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//        }
+//        return new ResponseEntity<>(categoryList, HttpStatus.OK);
+//    }
 }
