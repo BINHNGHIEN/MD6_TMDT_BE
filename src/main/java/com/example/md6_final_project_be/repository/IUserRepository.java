@@ -1,36 +1,30 @@
 package com.example.md6_final_project_be.repository;
 
-import com.example.md6_final_project_be.model.AppUser;
+import com.example.md6_final_project_be.model.Role;
+import com.example.md6_final_project_be.model.RoleName;
+import com.example.md6_final_project_be.model.User;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
+import java.util.Set;
 
 
-@Repository
-public interface IUserRepository extends JpaRepository<AppUser,Long> {
-    Optional<AppUser> findByUsername(String name); //Tim kiem User co ton tai trong DB khong?
-    Boolean existsByUsername(String username); //username da co trong DB chua, khi tao du lieu
-    Boolean existsByEmail(String email); //email da co trong DB chua
+public interface IUserRepository extends JpaRepository<User, Long> {
 
-    @Query(value = "SELECT * FROM app_user a JOIN user_role u ON id = user_id WHERE role_id = 1", nativeQuery = true)
-    Iterable<AppUser> findAllCustomer();
+    Boolean existsByEmail(String email);
 
-    @Query(value = "SELECT * FROM app_user JOIN user_role ON id = user_id WHERE role_id = 1 AND phonenb LIKE ?1", nativeQuery = true)
-    Iterable<AppUser> findCustomerByPhoneNB(String phoneNB);
+    Optional<User> findByUsername(String name);
 
-    @Query(value = "SELECT * FROM app_user JOIN user_role ON id = user_id WHERE role_id = 1 ORDER BY name", nativeQuery = true)
-    Iterable<AppUser> findAllCustomerOrderByName();
+    Boolean existsByUsername(String username);
 
-    @Query(value = "SELECT * FROM app_user JOIN user_role ON id = user_id WHERE role_id = 1 ORDER BY name DESC", nativeQuery = true)
-    Iterable<AppUser> findAllCustomerOrderByNameDesc();
+    @Query(value = "SELECT * FROM user LEFT JOIN user_role ON user.id = user_role.user_id WHERE user_role.role_id = 1 AND user.phone LIKE ?1", nativeQuery = true)
+    Iterable<User> findCustomerByPhone(String phone);
 
-    @Query(value = "SELECT * FROM app_user JOIN user_role ON id = user_id WHERE role_id = 1 ORDER BY create_date", nativeQuery = true)
-    Iterable<AppUser> findAllCustomerOrderByCreateDate();
-
-    @Query(value = "SELECT * FROM app_user JOIN user_role ON id = user_id WHERE role_id = 1 ORDER BY create_date DESC", nativeQuery = true)
-    Iterable<AppUser> findAllCustomerOrderByCreateDateDesc();
+    Iterable<User> findAllByRolesIn(Set<Role> role, Sort sort);
 
 }
 
