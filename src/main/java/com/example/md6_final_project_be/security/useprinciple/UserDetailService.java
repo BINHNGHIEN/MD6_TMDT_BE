@@ -1,8 +1,8 @@
 package com.example.md6_final_project_be.security.useprinciple;
 
-import com.example.md6_final_project_be.model.AppUser;
+import com.example.md6_final_project_be.model.User;
 import com.example.md6_final_project_be.repository.IUserRepository;
-import com.example.md6_final_project_be.service.user.UserServiceIMPL;
+import com.example.md6_final_project_be.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,16 +18,16 @@ public class UserDetailService implements UserDetailsService {
     @Autowired
     IUserRepository userRepository;
     @Autowired
-    UserServiceIMPL userService;
+    UserServiceImpl userService;
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        AppUser user = userRepository.findByUsername(username).orElseThrow(()-> new UsernameNotFoundException("User not found -> username or password"+username));
+        User user = userRepository.findByUsername(username).orElseThrow(()-> new UsernameNotFoundException("User not found -> username or password"+username));
         return UserPrinciple.build(user);
     }
     //HAM LAY RA USER HIEN TAI DE THUC HIEN THAO TAC VOI DB
-    public AppUser getCurrentUser(){
-        Optional<AppUser> user;
+    public User getCurrentUser(){
+        Optional<User> user;
         String userName;
         //Lay 1 object principal trong SecurityContexHolder
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -43,7 +43,7 @@ public class UserDetailService implements UserDetailsService {
             user = userService.findByUsername(userName);
         } else {
             //Neu chua ton tai thi tra ve 1 the hien cua lop User thong qua Optional.of
-            user = Optional.of(new AppUser());
+            user = Optional.of(new User());
             //set cho no 1 cai ten user an danh Day la truong hop ma tuong tac qua dang nhap kieu FB hay GG
             user.get().setUsername("Anonymous");
         }

@@ -1,6 +1,6 @@
 package com.example.md6_final_project_be.security.useprinciple;
 
-import com.example.md6_final_project_be.model.AppUser;
+import com.example.md6_final_project_be.model.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -32,7 +32,7 @@ public class UserPrinciple implements UserDetails {
         this.avatar = avatar;
         this.roles = roles;
     }
-    public static UserPrinciple build(AppUser user){
+    public static UserPrinciple build(User user){
         List<GrantedAuthority> authorities = user.getRoles().stream().map(role->
                 new SimpleGrantedAuthority(role.getName().name())).collect(Collectors.toList());
         return new UserPrinciple(
