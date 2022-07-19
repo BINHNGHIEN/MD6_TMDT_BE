@@ -3,7 +3,6 @@ package com.example.md6_final_project_be.service.user;
 import com.example.md6_final_project_be.model.AppUser;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
