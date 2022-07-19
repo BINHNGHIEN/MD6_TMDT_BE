@@ -20,7 +20,7 @@ import java.util.Optional;
 
 
 @CrossOrigin(origins = "*")
-@RequestMapping("category")
+@RequestMapping("auth/category")
 @RestController
 public class CategoryController {
     @Autowired
@@ -43,7 +43,7 @@ public class CategoryController {
                 return new ResponseEntity<>(new ResponseMessage("no_name_category"), HttpStatus.OK);
             }
             if(category.getAvatarCategory()==null){
-                return new ResponseEntity<>(new ResponseMessage("no_avatar-category"),HttpStatus.OK);
+                category.setAvatarCategory("https://firebasestorage.googleapis.com/v0/b/chinhbeo-18d3b.appspot.com/o/avatar.png?alt=media&token=3511cf81-8df2-4483-82a8-17becfd03211");
             }
             categoryService.save(category);
             return new ResponseEntity<>(new ResponseMessage("yes"), HttpStatus.OK);
