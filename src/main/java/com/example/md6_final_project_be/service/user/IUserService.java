@@ -14,4 +14,5 @@ public interface IUserService {
     Boolean existsByEmail(String email);//email da co trong DB chua
     Page<AppUser> findAll(Pageable pageable); //Page User
     Iterable<AppUser> findAll();
+    Iterable<AppUser> findAllCustomer();
 }

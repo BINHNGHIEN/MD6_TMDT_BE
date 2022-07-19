@@ -43,4 +43,9 @@ public class UserServiceIMPL implements IUserService{
     public Page<AppUser> findAll(Pageable pageable) {
         return userRepository.findAll(pageable);
     }
+
+    @Override
+    public Iterable<AppUser> findAllCustomer() {
+        return userRepository.findAllCustomer();
+    }
 }

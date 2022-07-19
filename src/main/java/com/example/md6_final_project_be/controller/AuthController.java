@@ -30,7 +30,7 @@ import java.util.Set;
 @RestController
 @RequestMapping("/auth")
 @CrossOrigin("*")
-public class giAuthController {
+public class AuthController {
     @Autowired
     UserServiceIMPL userService;
     @Autowired
