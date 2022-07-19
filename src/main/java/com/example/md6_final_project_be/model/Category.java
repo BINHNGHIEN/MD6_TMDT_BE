@@ -15,16 +15,16 @@ public class Category {
     private String nameCategory;
     private String avatarCategory;
     @ManyToOne
-    User user;
+    AppUser appUser;
 
     public Category() {
     }
 
-    public Category(Long id, String nameCategory, String avatarCategory, User user) {
+    public Category(Long id, String nameCategory, String avatarCategory, AppUser appUser) {
         this.id = id;
         this.nameCategory = nameCategory;
         this.avatarCategory = avatarCategory;
-        this.user = user;
+        this.appUser = appUser;
     }
 
     public Long getId() {
@@ -51,11 +51,11 @@ public class Category {
         this.avatarCategory = avatarCategory;
     }
 
-    public User getUser() {
-        return user;
+    public AppUser getAppUser() {
+        return appUser;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setAppUser(AppUser appUser) {
+        this.appUser = appUser;
     }
 }
