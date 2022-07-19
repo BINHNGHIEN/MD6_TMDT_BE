@@ -19,5 +19,18 @@ public interface IUserRepository extends JpaRepository<AppUser,Long> {
 
     @Query(value = "SELECT * FROM app_user JOIN user_role ON id = user_id WHERE role_id = 1 AND phonenb LIKE ?1", nativeQuery = true)
     Iterable<AppUser> findCustomerByPhoneNB(String phoneNB);
+
+    @Query(value = "SELECT * FROM app_user JOIN user_role ON id = user_id WHERE role_id = 1 ORDER BY name", nativeQuery = true)
+    Iterable<AppUser> findAllCustomerOrderByName();
+
+    @Query(value = "SELECT * FROM app_user JOIN user_role ON id = user_id WHERE role_id = 1 ORDER BY name DESC", nativeQuery = true)
+    Iterable<AppUser> findAllCustomerOrderByNameDesc();
+
+    @Query(value = "SELECT * FROM app_user JOIN user_role ON id = user_id WHERE role_id = 1 ORDER BY create_date", nativeQuery = true)
+    Iterable<AppUser> findAllCustomerOrderByCreateDate();
+
+    @Query(value = "SELECT * FROM app_user JOIN user_role ON id = user_id WHERE role_id = 1 ORDER BY create_date DESC", nativeQuery = true)
+    Iterable<AppUser> findAllCustomerOrderByCreateDateDesc();
+
 }
 

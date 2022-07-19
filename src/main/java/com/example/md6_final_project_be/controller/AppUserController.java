@@ -26,4 +26,25 @@ public class AppUserController {
         Iterable<AppUser> customers = userService.findCustomerByPhoneNB(phoneNB);
         return new ResponseEntity<>(customers, HttpStatus.OK);
     }
+
+    @GetMapping("/orderbyname")
+    public ResponseEntity<Iterable<AppUser>> findAllCustomerOrderByName() {
+        Iterable<AppUser> customers = userService.findAllCustomerOrderByName();
+        return new ResponseEntity<>(customers, HttpStatus.OK);
+    }
+    @GetMapping("/orderbynamedesc")
+    public ResponseEntity<Iterable<AppUser>> findAllCustomerOrderByNameDesc() {
+        Iterable<AppUser> customers = userService.findAllCustomerOrderByNameDesc();
+        return new ResponseEntity<>(customers, HttpStatus.OK);
+    }
+    @GetMapping("/orderbydate")
+    public ResponseEntity<Iterable<AppUser>> findAllCustomerOrderByCreateDate() {
+        Iterable<AppUser> customers = userService.findAllCustomerOrderByCreateDate();
+        return new ResponseEntity<>(customers, HttpStatus.OK);
+    }
+    @GetMapping("/orderbydatedesc")
+    public ResponseEntity<Iterable<AppUser>> findAllCustomerOrderByCreateDateDesc() {
+        Iterable<AppUser> customers = userService.findAllCustomerOrderByCreateDateDesc();
+        return new ResponseEntity<>(customers, HttpStatus.OK);
+    }
 }
