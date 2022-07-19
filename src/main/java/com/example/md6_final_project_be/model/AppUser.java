@@ -21,9 +21,8 @@ public class AppUser {
     @Size(max = 50)
     @Email
     private String email;
-    @Email
+    @Size(min = 10, max = 11)
     private String phoneNB;
-    @Email
     private LocalDateTime createDate;
     @JsonIgnore
     @Size(min = 6, max = 100)
