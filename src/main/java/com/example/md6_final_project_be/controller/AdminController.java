@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/admin")
@@ -57,4 +59,17 @@ public class AdminController {
             return new ResponseEntity<>(appUserList1, HttpStatus.OK);
         }
     }
+
+    // thăng chức nhân viên từ PM->Admin
+    @PutMapping("/{id}")
+    public ResponseEntity<?> changeRoles(@PathVariable Long id){
+        Optional<User> changUser = userService.findById(id);
+        Set<Role> roles = changUser.get().getRoles();
+        Role adminRole = roleService.findByName(RoleName.ADMIN).orElseThrow(() -> new RuntimeException("Role not found"));
+        roles.add(adminRole);
+        changUser.get().setRoles(roles);
+        userService.save(changUser.get());
+        return new ResponseEntity<>(changUser,HttpStatus.OK);
+    }
+
 }
