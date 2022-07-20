@@ -51,11 +51,11 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<?> register(@Valid @RequestBody SignUpForm signUpForm) {
-        if (userService.existsByUsername(signUpForm.getUsername())) {
-            return new ResponseEntity<>(new ResponseMessage("Username is exists"), HttpStatus.CONFLICT);
+        if (Boolean.TRUE.equals(userService.existsByUsername(signUpForm.getUsername()))) {
+            return new ResponseEntity<>(new ResponseMessage("The username is existed! Please try again!"), HttpStatus.OK);
         }
-        if (userService.existsByEmail(signUpForm.getEmail())) {
-            return new ResponseEntity<>(new ResponseMessage("Email is exists"), HttpStatus.CONFLICT);
+        if (Boolean.TRUE.equals(userService.existsByEmail(signUpForm.getEmail()))) {
+            return new ResponseEntity<>(new ResponseMessage("The email is existed! Please try again!"), HttpStatus.OK);
         }
         if (signUpForm.getAvatar() == null || signUpForm.getAvatar().trim().isEmpty()) {
             signUpForm.setAvatar("https://firebasestorage.googleapis.com/v0/b/chinhbeo-18d3b.appspot.com/o/avatar.png?alt=media&token=3511cf81-8df2-4483-82a8-17becfd03211");
