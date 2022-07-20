@@ -11,7 +11,22 @@ import java.util.Optional;
 public class ProductServiceIMPL implements IProductService{
     @Autowired
     IProductRepository productRepository;
-    public Optional<Product> findByName(Product nameProduct){
-        return productRepository.findByName(nameProduct);
+    @Override
+    public Iterable<Product> findByName(String name) {
+        return productRepository.findByNameProductContaining(name);
     }
+
+    @Override
+    public Optional<Product> findById(Long id) {
+        return productRepository.findById(id);
+    }
+
+    @Override
+    public void save(Product product) {
+        productRepository.save(product);
+    }
+    @Override
+    public void remove(long id) {
+    }
+
 }
