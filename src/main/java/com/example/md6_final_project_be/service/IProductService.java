@@ -14,4 +14,5 @@ public interface IProductService {
     void save(Product product);
     Iterable<Product> findByCategory(String name);
     void deleteProduct(Long id);
+    Iterable<Product> findAllProduct();
 }

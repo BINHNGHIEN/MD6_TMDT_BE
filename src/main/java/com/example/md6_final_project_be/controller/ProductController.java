@@ -61,5 +61,12 @@ public class ProductController {
         productService.deleteProduct(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    //show list sản phẩm
+    @GetMapping()
+    public ResponseEntity<?> showListProduct(){
+        Iterable<Product> products = productService.findAllProduct();
+        return new ResponseEntity<>(products,HttpStatus.OK);
+    }
 }
 

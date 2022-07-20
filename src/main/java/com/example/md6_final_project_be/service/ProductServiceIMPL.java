@@ -39,4 +39,9 @@ public class ProductServiceIMPL implements IProductService{
     public void deleteProduct(Long id) {
         productRepository.deleteById(id);
     }
+
+    @Override
+    public Iterable<Product> findAllProduct() {
+        return productRepository.findAll();
+    }
 }
