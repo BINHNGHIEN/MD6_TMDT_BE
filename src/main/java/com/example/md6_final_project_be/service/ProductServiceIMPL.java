@@ -34,4 +34,9 @@ public class ProductServiceIMPL implements IProductService{
         Optional<Category> category = categoryService.findByName(name);
         return productRepository.findByCategory(category.get());
     }
+
+    @Override
+    public void deleteProduct(Long id) {
+        productRepository.deleteById(id);
+    }
 }

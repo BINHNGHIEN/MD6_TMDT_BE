@@ -25,7 +25,7 @@ public class ProductController {
     }
 
     // up ảnh
-    @PostMapping("/upImg/{id}")
+    @PostMapping("/addImg/{id}")
     public ResponseEntity<?> upImg(@RequestBody String img, @PathVariable Long id){
         Optional<Product> product = productService.findById(id);
         product.get().setAvatarProduct(img);
@@ -47,6 +47,19 @@ public class ProductController {
     public ResponseEntity<?> searchProductByCategory(@PathVariable String name){
         Iterable<Product> products = productService.findByCategory(name);
         return new ResponseEntity<>(products, HttpStatus.OK);
+    }
+
+    // thêm sản phẩm
+    @PostMapping()
+    public ResponseEntity<?> addProduct(@RequestBody Product product){
+        productService.save(product);
+        return new ResponseEntity<>(product,HttpStatus.OK);
+    }
+    // xóa sản phẩm
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteProduct(@PathVariable Long id){
+        productService.deleteProduct(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
 
