@@ -12,5 +12,7 @@ public interface IProductService {
     Iterable<Product> findByName(String name);
     Optional<Product> findById(Long id);
     void save(Product product);
-    void remove(long id);
+    Iterable<Product> findByCategory(String name);
+    void deleteProduct(Long id);
+    Iterable<Product> findAllProduct();
 }

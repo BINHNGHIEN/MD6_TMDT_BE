@@ -1,7 +1,9 @@
 package com.example.md6_final_project_be.service.product;
 
+import com.example.md6_final_project_be.model.Category;
 import com.example.md6_final_project_be.model.Product;
 import com.example.md6_final_project_be.repository.IProductRepository;
+import com.example.md6_final_project_be.service.category.ICategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +13,8 @@ import java.util.Optional;
 public class ProductServiceIMPL implements IProductService{
     @Autowired
     IProductRepository productRepository;
+    @Autowired
+    ICategoryService categoryService;
     @Override
     public Iterable<Product> findByName(String name) {
         return productRepository.findByNameProductContaining(name);
@@ -25,8 +29,21 @@ public class ProductServiceIMPL implements IProductService{
     public void save(Product product) {
         productRepository.save(product);
     }
+
     @Override
-    public void remove(long id) {
+    public Iterable<Product> findByCategory(String name) {
+        Optional<Category> category = categoryService.findByName(name);
+        return productRepository.findByCategory(category.get());
+    }
+
+    @Override
+    public void deleteProduct(Long id) {
+    productRepository.deleteById(id);
+    }
+
+    @Override
+    public Iterable<Product> findAllProduct(){
+        return productRepository.findAll();
     }
 
 }

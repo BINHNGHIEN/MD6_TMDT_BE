@@ -1,20 +1,17 @@
 package com.example.md6_final_project_be.controller;
 
-import com.example.md6_final_project_be.dto.response.ResponseMessage;
-import com.example.md6_final_project_be.model.AppUser;
+
 import com.example.md6_final_project_be.model.Product;
-import com.example.md6_final_project_be.model.Role;
-import com.example.md6_final_project_be.service.product.IProductService;
+
 import com.example.md6_final_project_be.service.product.ProductServiceIMPL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.Optional;
-import java.util.Set;
+
 
 @RestController
 @RequestMapping("/product")
@@ -39,13 +36,36 @@ public class ProductController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    // chỉnh sửa sản phẩm
+
     @PutMapping("/{id}")
     public ResponseEntity<?> editProduct(@RequestBody Product product, @PathVariable Long id){
         Optional<Product> product1 = productService.findById(id);
         product.setId(product1.get().getId());
         productService.save(product);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+    @PostMapping()
+    public ResponseEntity<?> addProduct(@RequestBody Product product){
+        productService.save(product);
+        return new ResponseEntity<>(product,HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteProduct(@PathVariable Long id){
+        productService.deleteProduct(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+
+    @GetMapping()
+    public ResponseEntity<?> showListProduct(){
+        Iterable<Product> products = productService.findAllProduct();
+        return new ResponseEntity<>(products,HttpStatus.OK);
+    }
+    @GetMapping("/searchCategory/{name}")
+    public ResponseEntity<?> searchProductByCategory(@PathVariable String name){
+        Iterable<Product> products = productService.findByCategory(name);
+        return new ResponseEntity<>(products, HttpStatus.OK);
     }
 }
 
