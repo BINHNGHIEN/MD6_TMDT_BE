@@ -18,4 +18,5 @@ public interface ICategoryService {
     Optional<Category> findById(Long id);
     Page<Category> findAllByNameCategoryContaining(String nameCategory, Pageable pageable);
     Page<Category> findByNameCategoryQuery(@Param("nameCategory") String nameCategory, Pageable pageable);
+    Optional<Category> findByName(String name);
 }
