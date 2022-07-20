@@ -1,6 +1,6 @@
 package com.example.md6_final_project_be.repository;
 
-import com.example.md6_final_project_be.model.AppUser;
+import com.example.md6_final_project_be.model.User;
 import com.example.md6_final_project_be.model.Category;
 import com.example.md6_final_project_be.model.Product;
 import org.springframework.data.jpa.repository.JpaRepository;

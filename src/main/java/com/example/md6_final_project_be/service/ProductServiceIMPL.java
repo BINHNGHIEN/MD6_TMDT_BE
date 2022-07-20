@@ -1,5 +1,6 @@
-package com.example.md6_final_project_be.service.product;
+package com.example.md6_final_project_be.service;
 
+import com.example.md6_final_project_be.model.Category;
 import com.example.md6_final_project_be.model.Product;
 import com.example.md6_final_project_be.repository.IProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,8 @@ import java.util.Optional;
 public class ProductServiceIMPL implements IProductService{
     @Autowired
     IProductRepository productRepository;
+    @Autowired
+    ICategoryService categoryService;
     @Override
     public Iterable<Product> findByName(String name) {
         return productRepository.findByNameProductContaining(name);
@@ -28,7 +31,7 @@ public class ProductServiceIMPL implements IProductService{
 
     @Override
     public Iterable<Product> findByCategory(String name) {
-
-        return productRepository.findByCategory();
+        Optional<Category> category = categoryService.findByName(name);
+        return productRepository.findByCategory(category.get());
     }
 }

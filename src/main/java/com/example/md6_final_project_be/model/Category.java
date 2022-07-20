@@ -15,12 +15,12 @@ public class Category {
     private String nameCategory;
     private String avatarCategory;
     @ManyToOne
-    AppUser appUser;
+    User appUser;
 
     public Category() {
     }
 
-    public Category(Long id, String nameCategory, String avatarCategory, AppUser appUser) {
+    public Category(Long id, String nameCategory, String avatarCategory, User appUser) {
         this.id = id;
         this.nameCategory = nameCategory;
         this.avatarCategory = avatarCategory;
@@ -51,11 +51,11 @@ public class Category {
         this.avatarCategory = avatarCategory;
     }
 
-    public AppUser getAppUser() {
+    public User getAppUser() {
         return appUser;
     }
 
-    public void setAppUser(AppUser appUser) {
+    public void setAppUser(User appUser) {
         this.appUser = appUser;
     }
 }

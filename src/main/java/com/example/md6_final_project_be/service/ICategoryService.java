@@ -1,4 +1,4 @@
-package com.example.md6_final_project_be.service.category;
+package com.example.md6_final_project_be.service;
 
 import com.example.md6_final_project_be.model.Category;
 import org.springframework.data.domain.Page;
@@ -10,7 +10,7 @@ import java.util.Optional;
 
 public interface ICategoryService {
     List<Category> findAll();
-
+    Optional<Category> findByName(String name);
     Page<Category> findAll(Pageable pageable);
     Category save(Category category);
     Boolean existsByNameCategory(String nameCategory);

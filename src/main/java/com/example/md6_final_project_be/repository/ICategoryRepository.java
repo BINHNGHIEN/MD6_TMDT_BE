@@ -8,9 +8,13 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface ICategoryRepository extends JpaRepository<Category, Long> {
     Boolean existsByNameCategory(String nameCategory);
+
+    Optional<Category> findByNameCategory(String name);
 
     Page<Category> findAllByNameCategoryContaining(String nameCategory, Pageable pageable);
 

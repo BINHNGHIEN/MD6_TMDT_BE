@@ -9,7 +9,7 @@ import com.example.md6_final_project_be.model.RoleName;
 import com.example.md6_final_project_be.security.jwt.JwtProvider;
 import com.example.md6_final_project_be.security.jwt.JwtTokenFilter;
 import com.example.md6_final_project_be.security.useprinciple.UserPrinciple;
-import com.example.md6_final_project_be.service.role.RoleServiceIMPL;
+import com.example.md6_final_project_be.service.RoleServiceIMPL;
 import com.example.md6_final_project_be.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

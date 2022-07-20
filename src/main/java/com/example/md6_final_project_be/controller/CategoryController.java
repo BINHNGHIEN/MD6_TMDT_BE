@@ -2,10 +2,10 @@ package com.example.md6_final_project_be.controller;
 
 
 import com.example.md6_final_project_be.dto.response.ResponseMessage;
-import com.example.md6_final_project_be.model.AppUser;
+import com.example.md6_final_project_be.model.User;
 import com.example.md6_final_project_be.model.Category;
 import com.example.md6_final_project_be.security.useprinciple.UserDetailService;
-import com.example.md6_final_project_be.service.category.CategoryServiceImpl;
+import com.example.md6_final_project_be.service.CategoryServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,7 +15,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 
@@ -37,7 +36,7 @@ public class CategoryController {
     }
     @PostMapping
     public ResponseEntity<?> createCategory(@RequestBody Category category){
-        AppUser appUser = userDetailService.getCurrentUser();
+        User appUser = userDetailService.getCurrentUser();
         if(!appUser.getUsername().equals("Anonymous")){
             if(categoryService.existsByNameCategory(category.getNameCategory())){
                 return new ResponseEntity<>(new ResponseMessage("no_name_category"), HttpStatus.OK);

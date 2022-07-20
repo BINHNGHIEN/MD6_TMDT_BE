@@ -1,8 +1,9 @@
-package com.example.md6_final_project_be.service.category;
+package com.example.md6_final_project_be.service;
 
 
-import com.example.md6_final_project_be.model.AppUser;
+import com.example.md6_final_project_be.model.User;
 import com.example.md6_final_project_be.model.Category;
+import com.example.md6_final_project_be.model.User;
 import com.example.md6_final_project_be.repository.ICategoryRepository;
 import com.example.md6_final_project_be.security.useprinciple.UserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,13 +27,18 @@ public class CategoryServiceImpl implements ICategoryService {
     }
 
     @Override
+    public Optional<Category> findByName(String name) {
+        return categoryRepository.findByNameCategory(name);
+    }
+
+    @Override
     public Page<Category> findAll(Pageable pageable) {
         return categoryRepository.findAll(pageable);
     }
 
     @Override
     public Category save(Category category) {
-        AppUser appUser = userDetailService.getCurrentUser();
+        User appUser = userDetailService.getCurrentUser();
         category.setAppUser(appUser);
         return categoryRepository.save(category);
     }

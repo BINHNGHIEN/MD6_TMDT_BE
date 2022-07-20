@@ -1,4 +1,4 @@
-package com.example.md6_final_project_be.service.admin;
+package com.example.md6_final_project_be.service;
 
 import com.example.md6_final_project_be.model.User;
 import org.springframework.stereotype.Service;
