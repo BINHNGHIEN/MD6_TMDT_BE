@@ -28,7 +28,7 @@ public class CategoryServiceImpl implements ICategoryService {
 
     @Override
     public Optional<Category> findByName(String name) {
-        return categoryRepository.findByNameCategory(name);
+        return categoryRepository.findByName(name);
     }
 
     @Override
@@ -38,14 +38,12 @@ public class CategoryServiceImpl implements ICategoryService {
 
     @Override
     public Category save(Category category) {
-        User appUser = userDetailService.getCurrentUser();
-        category.setAppUser(appUser);
         return categoryRepository.save(category);
     }
 
     @Override
-    public Boolean existsByNameCategory(String nameCategory) {
-        return categoryRepository.existsByNameCategory(nameCategory);
+    public Boolean existsByNameCategory(String name) {
+        return categoryRepository.existsByName(name);
     }
 
     @Override
@@ -60,7 +58,7 @@ public class CategoryServiceImpl implements ICategoryService {
 
     @Override
     public Page<Category> findAllByNameCategoryContaining(String nameCategory, Pageable pageable) {
-        return categoryRepository.findAllByNameCategoryContaining(nameCategory, pageable);
+        return categoryRepository.findAllByNameContaining(nameCategory, pageable);
     }
 
     @Override

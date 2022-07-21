@@ -16,7 +16,7 @@ public class ProductServiceIMPL implements IProductService{
     ICategoryService categoryService;
     @Override
     public Iterable<Product> findByName(String name) {
-        return productRepository.findByNameProductContaining(name);
+        return productRepository.findByNameContaining(name);
     }
 
     @Override
@@ -25,8 +25,8 @@ public class ProductServiceIMPL implements IProductService{
     }
 
     @Override
-    public void save(Product product) {
-        productRepository.save(product);
+    public Product save(Product product) {
+        return productRepository.save(product);
     }
 
     @Override
