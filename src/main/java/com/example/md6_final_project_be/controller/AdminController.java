@@ -60,16 +60,58 @@ public class AdminController {
         }
     }
 
-    // thăng chức nhân viên từ PM->Admin
-    @PutMapping("/{id}")
-    public ResponseEntity<?> changeRoles(@PathVariable Long id){
+    // thăng chức nhân viên từ user->PM và PM->Admin
+    @PutMapping("/upRole/{id}")
+    public ResponseEntity<?> changeRolesUp(@PathVariable Long id){
         Optional<User> changUser = userService.findById(id);
         Set<Role> roles = changUser.get().getRoles();
-        Role adminRole = roleService.findByName(RoleName.ADMIN).orElseThrow(() -> new RuntimeException("Role not found"));
-        roles.add(adminRole);
-        changUser.get().setRoles(roles);
+        if(roles.contains(roleService.findByName(RoleName.USER).get())){
+            if (roles.contains(roleService.findByName(RoleName.PM).get())){
+                if (roles.contains(roleService.findByName(RoleName.ADMIN).get())){
+                    return new ResponseEntity<>(new ResponseMessage("Role cao nhất rồi"),HttpStatus.OK);
+                }else {
+                    Role adminRole = roleService.findByName(RoleName.ADMIN).orElseThrow(() -> new RuntimeException("Role not found"));
+                    roles.add(adminRole);
+                    changUser.get().setRoles(roles);
+                }
+            }else {
+                Role pmRole = roleService.findByName(RoleName.PM).orElseThrow(() -> new RuntimeException("Role not found"));
+                roles.add(pmRole);
+                changUser.get().setRoles(roles);
+            }
+        }
         userService.save(changUser.get());
         return new ResponseEntity<>(changUser,HttpStatus.OK);
     }
 
+    // tụt chức nhân viên từ  PM --> user và  Admin --> Pm
+    @PutMapping("/downRole/{id}")
+    public ResponseEntity<?> changeRolesDown(@PathVariable Long id){
+        Optional<User> changUser = userService.findById(id);
+        Set<Role> roles = changUser.get().getRoles();
+        if(roles.contains(roleService.findByName(RoleName.USER).get())){
+            if (roles.contains(roleService.findByName(RoleName.PM).get())){
+                if (roles.contains(roleService.findByName(RoleName.ADMIN).get())){
+                    Role adminRole = roleService.findByName(RoleName.ADMIN).orElseThrow(() -> new RuntimeException("Role not found"));
+                    roles.remove(adminRole);
+                    changUser.get().setRoles(roles);
+                }else {
+                    Role pmRole = roleService.findByName(RoleName.PM).orElseThrow(() -> new RuntimeException("Role not found"));
+                    roles.remove(pmRole);
+                    changUser.get().setRoles(roles);
+                }
+            }else {
+                return new ResponseEntity<>(new ResponseMessage("not down"),HttpStatus.OK);
+            }
+        }
+        userService.save(changUser.get());
+        return new ResponseEntity<>(changUser,HttpStatus.OK);
+    }
+
+    // xóa tài khoản
+    @DeleteMapping("/{id}")
+    public  ResponseEntity<?> deletePm(@PathVariable Long id){
+        userService.delete(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
