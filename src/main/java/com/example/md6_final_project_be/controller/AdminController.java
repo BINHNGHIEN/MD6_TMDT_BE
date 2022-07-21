@@ -121,4 +121,11 @@ public class AdminController {
         Optional<User> user = userService.findById(id);
         return new ResponseEntity<>(user,HttpStatus.OK);
     }
+
+    // thêm nhân viên
+    @PostMapping("/createPM")
+    public ResponseEntity<?> createPm(@RequestBody User user){
+        userService.save(user);
+        return new ResponseEntity<>(new ResponseMessage("created!"),HttpStatus.OK);
+    }
 }
