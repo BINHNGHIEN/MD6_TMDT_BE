@@ -114,4 +114,7 @@ public class AdminController {
         userService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    // xem chi tiết nhân viên
+
 }
