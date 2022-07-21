@@ -128,4 +128,12 @@ public class AdminController {
         userService.save(user);
         return new ResponseEntity<>(new ResponseMessage("created!"),HttpStatus.OK);
     }
+
+    // sửa nhân viên
+    @PutMapping("/editPM/{id}")
+    public ResponseEntity<?> editPm(@RequestBody User user,@PathVariable Long id){
+        user.setId(id);
+        userService.save(user);
+        return new ResponseEntity<>(new ResponseMessage("edit Ok!"),HttpStatus.OK);
+    }
 }
