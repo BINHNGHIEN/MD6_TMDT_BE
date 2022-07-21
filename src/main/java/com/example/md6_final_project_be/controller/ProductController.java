@@ -1,5 +1,6 @@
 package com.example.md6_final_project_be.controller;
 
+import com.example.md6_final_project_be.dto.response.ResponseMessage;
 import com.example.md6_final_project_be.model.User;
 import com.example.md6_final_project_be.model.Product;
 import com.example.md6_final_project_be.service.ProductServiceIMPL;
@@ -67,6 +68,13 @@ public class ProductController {
     public ResponseEntity<?> showListProduct(){
         Iterable<Product> products = productService.findAllProduct();
         return new ResponseEntity<>(products,HttpStatus.OK);
+    }
+
+    // chi tiết sản phẩm
+    @GetMapping("/detail/{id}")
+    public ResponseEntity<?> detailProduct(@PathVariable Long id){
+        Optional<Product> product = productService.findById(id);
+        return new ResponseEntity<>(product,HttpStatus.OK);
     }
 }
 
