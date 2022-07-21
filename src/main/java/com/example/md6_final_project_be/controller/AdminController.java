@@ -116,4 +116,9 @@ public class AdminController {
     }
 
     // xem chi tiết nhân viên
+    @GetMapping("/detail/{id}")
+    public ResponseEntity<?> detailPm(@PathVariable Long id){
+        Optional<User> user = userService.findById(id);
+        return new ResponseEntity<>(user,HttpStatus.OK);
+    }
 }
