@@ -1,6 +1,6 @@
-package com.example.md6_final_project_be.service.admin;
+package com.example.md6_final_project_be.service;
 
-import com.example.md6_final_project_be.model.AppUser;
+import com.example.md6_final_project_be.model.User;
 import com.example.md6_final_project_be.repository.IAdminRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 public class AdminServiceIMPL implements IAdminService{
     @Autowired
     IAdminRepository adminRepository;
-    public Iterable<AppUser> findAppUserByNameContaining(String name) {
+    public Iterable<User> findAppUserByNameContaining(String name) {
         return adminRepository.findAppUserByNameContaining(name);
     }
 }

@@ -8,12 +8,15 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-@Repository
+import java.util.Optional;
+
 public interface ICategoryRepository extends JpaRepository<Category, Long> {
-    Boolean existsByNameCategory(String nameCategory);
+    Boolean existsByName(String name);
 
-    Page<Category> findAllByNameCategoryContaining(String nameCategory, Pageable pageable);
+    Optional<Category> findByName(String name);
 
-    @Query("SELECT c FROM Category AS c WHERE c.nameCategory LIKE CONCAT('%',:nameCategory,'%')")
-    Page<Category> findByNameCategoryQuery(@Param("nameCategory") String nameCategory, Pageable pageable);
+    Page<Category> findAllByNameContaining(String name, Pageable pageable);
+
+    @Query("SELECT c FROM Category AS c WHERE c.name LIKE CONCAT('%',:name,'%')")
+    Page<Category> findByNameCategoryQuery(@Param("name") String name, Pageable pageable);
 }

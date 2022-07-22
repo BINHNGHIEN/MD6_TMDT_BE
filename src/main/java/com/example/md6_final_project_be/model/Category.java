@@ -3,28 +3,17 @@ package com.example.md6_final_project_be.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "categorys", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {
-                "nameCategory"
-        })
-})
+@Table(name = "categories")
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nameCategory;
-    private String avatarCategory;
-    @ManyToOne
-    AppUser appUser;
+
+    @Column(unique = true)
+    private String name;
+    private String avatar;
 
     public Category() {
-    }
-
-    public Category(Long id, String nameCategory, String avatarCategory, AppUser appUser) {
-        this.id = id;
-        this.nameCategory = nameCategory;
-        this.avatarCategory = avatarCategory;
-        this.appUser = appUser;
     }
 
     public Long getId() {
@@ -35,27 +24,19 @@ public class Category {
         this.id = id;
     }
 
-    public String getNameCategory() {
-        return nameCategory;
+    public String getName() {
+        return name;
     }
 
-    public void setNameCategory(String nameCategory) {
-        this.nameCategory = nameCategory;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getAvatarCategory() {
-        return avatarCategory;
+    public String getAvatar() {
+        return avatar;
     }
 
-    public void setAvatarCategory(String avatarCategory) {
-        this.avatarCategory = avatarCategory;
-    }
-
-    public AppUser getAppUser() {
-        return appUser;
-    }
-
-    public void setAppUser(AppUser appUser) {
-        this.appUser = appUser;
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 }

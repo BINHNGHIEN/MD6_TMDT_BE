@@ -1,74 +1,66 @@
 package com.example.md6_final_project_be.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "products",uniqueConstraints ={
-        @UniqueConstraint(columnNames = {
-                "nameProduct"
-        })
-})
+@Table(name = "products")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    private String nameProduct;
-    private String avatarProduct;
-    private int priceProduct;
-    private int inventoryProduct;
+    private Long id;
+
+    @Column(unique = true)
+    private String name;
+    private String avatar;
+
+    @NotNull
+    private Double price;
+    private Integer inventory;
     @ManyToOne
     Category category;
 
     public Product() {
     }
 
-    public Product(long id, String nameProduct, String avatarProduct, int priceProduct, int inventoryProduct, com.example.md6_final_project_be.model.Category category) {
-        this.id = id;
-        this.nameProduct = nameProduct;
-        this.avatarProduct = avatarProduct;
-        this.priceProduct = priceProduct;
-        this.inventoryProduct = inventoryProduct;
-        this.category = category;
-    }
-
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getNameProduct() {
-        return nameProduct;
+    public String getName() {
+        return name;
     }
 
-    public void setNameProduct(String nameProduct) {
-        this.nameProduct = nameProduct;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getAvatarProduct() {
-        return avatarProduct;
+    public String getAvatar() {
+        return avatar;
     }
 
-    public void setAvatarProduct(String avatarProduct) {
-        this.avatarProduct = avatarProduct;
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
-    public int getPriceProduct() {
-        return priceProduct;
+    public Double getPrice() {
+        return price;
     }
 
-    public void setPriceProduct(int priceProduct) {
-        this.priceProduct = priceProduct;
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
-    public int getInventoryProduct() {
-        return inventoryProduct;
+    public Integer getInventory() {
+        return inventory;
     }
 
-    public void setInventoryProduct(int inventoryProduct) {
-        this.inventoryProduct = inventoryProduct;
+    public void setInventory(Integer inventory) {
+        this.inventory = inventory;
     }
 
     public Category getCategory() {
