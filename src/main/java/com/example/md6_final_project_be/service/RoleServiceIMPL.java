@@ -1,4 +1,4 @@
-package com.example.md6_final_project_be.service.role;
+package com.example.md6_final_project_be.service;
 
 import com.example.md6_final_project_be.model.Role;
 import com.example.md6_final_project_be.model.RoleName;

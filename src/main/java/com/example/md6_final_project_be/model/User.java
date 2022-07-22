@@ -10,19 +10,23 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-public class AppUser {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Size(min = 3, max = 50)
     private String name;
+
+    @Column(unique = true)
     @Size(min = 3, max = 50)
     private String username;
+
+    @Column(unique = true)
     @Size(max = 50)
     @Email
     private String email;
     @Size(min = 10, max = 11)
-    private String phoneNB;
+    private String phone;
     private LocalDateTime createDate;
     @JsonIgnore
     @Size(min = 6, max = 100)
@@ -30,14 +34,13 @@ public class AppUser {
     @Lob
     private String avatar;
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "user_role",
-            joinColumns = @JoinColumn(name = "user_id"),inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     Set<Role> roles = new HashSet<>();
 
-    public AppUser() {
+    public User() {
     }
 
-    public AppUser(Long id, String name, String username, String email, String password, String avatar, Set<Role> roles) {
+    public User(Long id, String name, String username, String email, String password, String avatar, Set<Role> roles) {
         this.id = id;
         this.name = name;
         this.username = username;
@@ -47,12 +50,12 @@ public class AppUser {
         this.roles = roles;
     }
 
-    public String getPhoneNB() {
-        return phoneNB;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setPhoneNB(String phoneNB) {
-        this.phoneNB = phoneNB;
+    public void setPhone(String phoneNB) {
+        this.phone = phoneNB;
     }
 
     public LocalDateTime getCreateDate() {
@@ -63,26 +66,26 @@ public class AppUser {
         this.createDate = createDate;
     }
 
-    public AppUser(Long id, String name, String username, String email, String phoneNB, String password, String avatar, Set<Role> roles) {
+    public User(Long id, String name, String username, String email, String phone, String password, String avatar, Set<Role> roles) {
         this.id = id;
         this.name = name;
         this.username = username;
         this.email = email;
-        this.phoneNB = phoneNB;
+        this.phone = phone;
         this.createDate = LocalDateTime.now();
         this.password = password;
         this.avatar = avatar;
         this.roles = roles;
     }
 
-    public AppUser(String name, String username, String email, String avatar, String encode
-    ) {
+    public User(String name, String username, String email, String avatar, String encode) {
         this.name = name;
         this.username = username;
         this.email = email;
         this.avatar = avatar;
         this.password = encode;
     }
+
     public Long getId() {
         return id;
     }

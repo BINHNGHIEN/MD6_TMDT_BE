@@ -1,20 +1,15 @@
 package com.example.md6_final_project_be.controller;
 
 import com.example.md6_final_project_be.dto.response.ResponseMessage;
-import com.example.md6_final_project_be.model.AppUser;
+import com.example.md6_final_project_be.model.User;
 import com.example.md6_final_project_be.model.Product;
-import com.example.md6_final_project_be.model.Role;
-import com.example.md6_final_project_be.service.product.IProductService;
-import com.example.md6_final_project_be.service.product.ProductServiceIMPL;
+import com.example.md6_final_project_be.service.ProductServiceIMPL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/product")
@@ -31,21 +26,55 @@ public class ProductController {
     }
 
     // up ảnh
-    @PostMapping("/upImg/{id}")
-    public ResponseEntity<?> upImg(@RequestBody String img, @PathVariable Long id){
+    @PostMapping("/addImg/{id}")
+    public ResponseEntity<?> upImg(@RequestBody String img, @PathVariable Long id) {
         Optional<Product> product = productService.findById(id);
-        product.get().setAvatarProduct(img);
+        product.get().setAvatar(img);
         productService.save(product.get());
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     // chỉnh sửa sản phẩm
     @PutMapping("/{id}")
-    public ResponseEntity<?> editProduct(@RequestBody Product product, @PathVariable Long id){
+    public ResponseEntity<?> editProduct(@RequestBody Product product, @PathVariable Long id) {
         Optional<Product> product1 = productService.findById(id);
         product.setId(product1.get().getId());
         productService.save(product);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    // tìm kiếm theo bộ lọc
+    @GetMapping("/searchCategory/{name}")
+    public ResponseEntity<?> searchProductByCategory(@PathVariable String name) {
+        Iterable<Product> products = productService.findByCategory(name);
+        return new ResponseEntity<>(products, HttpStatus.OK);
+    }
+
+    @PostMapping
+    @ResponseStatus(code = HttpStatus.CREATED)
+    public Product addProduct(@RequestBody Product product) {
+        return productService.save(product);
+    }
+
+    // xóa sản phẩm
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteProduct(@PathVariable Long id) {
+        productService.deleteProduct(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    //show list sản phẩm
+    @GetMapping()
+    public ResponseEntity<?> showListProduct() {
+        Iterable<Product> products = productService.findAllProduct();
+        return new ResponseEntity<>(products, HttpStatus.OK);
+    }
+
+    // chi tiết sản phẩm
+    @GetMapping("/detail/{id}")
+    public ResponseEntity<?> detailProduct(@PathVariable Long id) {
+        Optional<Product> product = productService.findById(id);
+        return new ResponseEntity<>(product, HttpStatus.OK);
     }
 }
 
