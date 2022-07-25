@@ -48,6 +48,7 @@ public class User {
         this.password = password;
         this.avatar = avatar;
         this.roles = roles;
+        this.createDate = LocalDateTime.now();
     }
 
     public String getPhone() {
@@ -84,6 +85,7 @@ public class User {
         this.email = email;
         this.avatar = avatar;
         this.password = encode;
+        this.createDate = LocalDateTime.now();
     }
 
     public Long getId() {
