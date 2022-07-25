@@ -3,7 +3,7 @@ package com.example.md6_final_project_be.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "categories")
+//@Table(name = "categories")
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

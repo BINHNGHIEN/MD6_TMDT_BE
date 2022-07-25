@@ -3,7 +3,7 @@ package com.example.md6_final_project_be.service.product;
 import com.example.md6_final_project_be.model.Category;
 import com.example.md6_final_project_be.model.Product;
 import com.example.md6_final_project_be.repository.IProductRepository;
-import com.example.md6_final_project_be.service.category.ICategoryService;
+import com.example.md6_final_project_be.service.ICategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
