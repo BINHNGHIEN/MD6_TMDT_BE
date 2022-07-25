@@ -31,7 +31,7 @@ public class ProductController {
     @PostMapping("/upImg/{id}")
     public ResponseEntity<?> upImg(@RequestBody String img, @PathVariable Long id){
         Optional<Product> product = productService.findById(id);
-        product.get().setAvatarProduct(img);
+        product.get().setAvatar(img);
         productService.save(product.get());
         return new ResponseEntity<>(HttpStatus.OK);
     }
