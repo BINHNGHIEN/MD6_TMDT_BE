@@ -45,5 +45,9 @@ public class ProductServiceIMPL implements IProductService{
     public Iterable<Product> findAllProduct(){
         return productRepository.findAll();
     }
+    @Override
+    public Iterable<Product> findProductByNameContaining(String name) {
+        return productRepository.findProductByNameContaining(name);
+    }
 
 }
