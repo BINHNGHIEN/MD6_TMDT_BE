@@ -27,25 +27,22 @@ public class CartElementController {
     @Autowired
     private UserDetailService userDetailService;
 
-    @GetMapping("/user/{userId}")
-    public ResponseEntity<Iterable<CartElement>> showCart(@PathVariable Long userId) {
-        User user = userService.findById(userId).get();
+    @GetMapping
+    public ResponseEntity<Iterable<CartElement>> showCart() {
+        User user = userDetailService.getCurrentUser();
         return new ResponseEntity<>(cartElementService.findAllByUser(user), HttpStatus.OK);
     }
 
-    @PostMapping("/{productId}")
-    public ResponseEntity<CartElement> addProductToCartElement( @PathVariable Long productId,
-                                                 @RequestParam(name = "qty") int quantity) {
+    @PostMapping
+    public ResponseEntity<CartElement> addProductToCartElement(@RequestBody CartElement cart) {
         User user = userDetailService.getCurrentUser();
-//        User user = userService.findById(userId).get();
-        Product product = productService.findById(productId).get();
-        CartElement cartElement = new CartElement(product, user, quantity);
-        return new ResponseEntity<>(cartElementService.save(cartElement),HttpStatus.CREATED);
+        cart.setUser(user);
+        return new ResponseEntity<>(cartElementService.save(cart), HttpStatus.CREATED);
     }
 
     @GetMapping("/{cartId}")
     public ResponseEntity<CartElement> findCartElementById(@PathVariable Long cartId) {
-        return new ResponseEntity<>(cartElementService.findById(cartId).get(),HttpStatus.OK);
+        return new ResponseEntity<>(cartElementService.findById(cartId).get(), HttpStatus.OK);
     }
 
     @DeleteMapping("/{cartId}")
@@ -62,7 +59,7 @@ public class CartElementController {
     @DeleteMapping("/remove/{userId}")
     public ResponseEntity<CartElement> deleteAllCartElementByUserId(@PathVariable Long userId) {
         Optional<User> user = userService.findById(userId);
-        if (user.isPresent()){
+        if (user.isPresent()) {
             cartElementService.deleteAllByUser(user.get());
             return new ResponseEntity<>(HttpStatus.OK);
         } else {
@@ -73,7 +70,7 @@ public class CartElementController {
     @PutMapping("/reduce/{cartId}")
     public ResponseEntity<CartElement> reduceQuantityOfCartElement(@PathVariable Long cartId) {
         Optional<CartElement> cartElement1 = cartElementService.findById(cartId);
-        CartElement cartElement2 = new CartElement(cartElement1.get().getProduct(), cartElement1.get().getUser(), cartElement1.get().getQuantity()-1);
+        CartElement cartElement2 = new CartElement(cartElement1.get().getProduct(), cartElement1.get().getUser(), cartElement1.get().getQuantity() - 1);
         cartElement2.setId(cartId);
         if (cartElement1.isPresent()) {
             cartElementService.save(cartElement2);
@@ -82,10 +79,11 @@ public class CartElementController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
     @PutMapping("/increase/{cartId}")
     public ResponseEntity<CartElement> increaseQuantityOfCartElement(@PathVariable Long cartId) {
         Optional<CartElement> cartElement1 = cartElementService.findById(cartId);
-        CartElement cartElement2 = new CartElement(cartElement1.get().getProduct(), cartElement1.get().getUser(), cartElement1.get().getQuantity()+1);
+        CartElement cartElement2 = new CartElement(cartElement1.get().getProduct(), cartElement1.get().getUser(), cartElement1.get().getQuantity() + 1);
         cartElement2.setId(cartId);
         if (cartElement1.isPresent()) {
             cartElementService.save(cartElement2);
