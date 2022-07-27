@@ -3,11 +3,13 @@ package com.example.md6_final_project_be.controller;
 import com.example.md6_final_project_be.model.CartElement;
 import com.example.md6_final_project_be.model.Product;
 import com.example.md6_final_project_be.model.User;
+import com.example.md6_final_project_be.security.useprinciple.UserDetailService;
 import com.example.md6_final_project_be.service.*;
 import com.example.md6_final_project_be.service.product.ProductServiceIMPL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -22,6 +24,8 @@ public class CartElementController {
     private UserServiceImpl userService;
     @Autowired
     private ProductServiceIMPL productService;
+    @Autowired
+    private UserDetailService userDetailService;
 
     @GetMapping("/user/{userId}")
     public ResponseEntity<Iterable<CartElement>> showCart(@PathVariable Long userId) {
@@ -29,10 +33,11 @@ public class CartElementController {
         return new ResponseEntity<>(cartElementService.findAllByUser(user), HttpStatus.OK);
     }
 
-    @PostMapping("/{userId}/{productId}")
-    public ResponseEntity<CartElement> addProductToCartElement(@PathVariable Long userId, @PathVariable Long productId,
+    @PostMapping("/{productId}")
+    public ResponseEntity<CartElement> addProductToCartElement( @PathVariable Long productId,
                                                  @RequestParam(name = "qty") int quantity) {
-        User user = userService.findById(userId).get();
+        User user = userDetailService.getCurrentUser();
+//        User user = userService.findById(userId).get();
         Product product = productService.findById(productId).get();
         CartElement cartElement = new CartElement(product, user, quantity);
         return new ResponseEntity<>(cartElementService.save(cartElement),HttpStatus.CREATED);
