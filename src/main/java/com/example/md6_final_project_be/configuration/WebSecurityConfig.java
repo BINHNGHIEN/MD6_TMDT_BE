@@ -50,11 +50,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.cors().and().csrf().disable()
-                .authorizeRequests().antMatchers("/auth/signin**","/auth/signup**","/auth/home1").permitAll()
-                .and().authorizeRequests().antMatchers("/auth/home").hasAnyRole("ADMIN")
-                .and().authorizeRequests().antMatchers("/auth/user/**").hasAnyRole("ADMIN","USER")
-                .and().authorizeRequests().antMatchers("/auth/admin/**").hasRole("ADMIN")
-                .and().authorizeRequests().antMatchers("/admin/**").permitAll()
+                .authorizeRequests().antMatchers("/auth/signin**","/auth/signup**","/**").permitAll()
                 .and()
                 .csrf().disable().
                 authorizeRequests()

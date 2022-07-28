@@ -17,7 +17,7 @@ public class ProductServiceIMPL implements IProductService{
     ICategoryService categoryService;
     @Override
     public Iterable<Product> findByName(String name) {
-        return productRepository.findByNameProductContaining(name);
+        return productRepository.findByNameContaining(name);
     }
 
     @Override
@@ -44,6 +44,10 @@ public class ProductServiceIMPL implements IProductService{
     @Override
     public Iterable<Product> findAllProduct(){
         return productRepository.findAll();
+    }
+    @Override
+    public Iterable<Product> findProductByNameContaining(String name) {
+        return productRepository.findProductByNameContaining(name);
     }
 
 }

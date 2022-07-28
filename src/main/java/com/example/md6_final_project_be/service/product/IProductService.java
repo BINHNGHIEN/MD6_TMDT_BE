@@ -15,4 +15,5 @@ public interface IProductService {
     Iterable<Product> findByCategory(String name);
     void deleteProduct(Long id);
     Iterable<Product> findAllProduct();
+    Iterable<Product> findProductByNameContaining( String name);
 }

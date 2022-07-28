@@ -50,7 +50,7 @@ public class CategoryController {
                 return new ResponseEntity<>(new ResponseMessage("no_name_category"), HttpStatus.OK);
             }
             if (category.getAvatar() == null) {
-                category.setAvatar("https://firebasestorage.googleapis.com/v0/b/chinhbeo-18d3b.appspot.com/o/avatar.png?alt=media&token=3511cf81-8df2-4483-82a8-17becfd03211");
+                category.setAvatar("https://firebasestorage.googleapis.com/v0/b/buihaibinh.appspot.com/o/wb6g937si7?alt=media&token=87043f63-a05a-47e2-86c9-db24d856e838");
             }
             categoryService.save(category);
             return new ResponseEntity<>(new ResponseMessage("yes"), HttpStatus.OK);
