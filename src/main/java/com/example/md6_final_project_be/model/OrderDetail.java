@@ -17,6 +17,7 @@ public class OrderDetail {
 
     private double quantity;
 
+
     public OrderDetail() {
     }
 

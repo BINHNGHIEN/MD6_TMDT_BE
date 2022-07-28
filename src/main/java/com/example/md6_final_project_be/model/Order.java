@@ -15,6 +15,9 @@ public class Order {
 
     private Date createDate;
 
+    @OneToOne
+    private OrderDetail orderDetail;
+
     public Order() {
     }
 

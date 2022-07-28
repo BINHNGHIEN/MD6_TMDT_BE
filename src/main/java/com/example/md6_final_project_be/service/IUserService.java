@@ -18,4 +18,5 @@ public interface IUserService {
     Iterable<User> findAllCustomerOrderByNameDesc();
     Iterable<User> findAllCustomerOrderByCreateDate();
     Iterable<User> findAllCustomerOrderByCreateDateDesc();
+
 }
